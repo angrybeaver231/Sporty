@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sporty - Твоя спортивная площадка</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">⚽</span>
+                    <span class="logo-text">Sporty</span>
+                </div>
+                <nav class="nav" id="mainNav">
+                    <ul class="nav-list">
+                        <li><a href="#home" class="nav-link active">Главная</a></li>
+                        <li><a href="#map" class="nav-link">Карта</a></li>
+                        <li><a href="#games" class="nav-link">Игры</a></li>
+                        <li><a href="#players" class="nav-link">Игроки</a></li>
+                        <li><a href="#profile" class="nav-link">Профиль</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="hero-title-main">Sporty</span>
+                    <span class="hero-title-sub">Цифровой хаб для спорта</span>
+                </h1>
+                <p class="hero-description">
+                    Объединяем людей и площадки. Создавайте игры, находите партнеров и развивайте свои навыки в комфортной среде
+                </p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary" onclick="scrollToSection('create')">Создать игру</button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('map')">Найти площадку</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="stat-number" data-target="1247">0</span>
+                        <span class="stat-label">Активных игроков</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number" data-target="89">0</span>
+                        <span class="stat-label">Площадок</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="stat-number" data-target="342">0</span>
+                        <span class="stat-label">Игр сегодня</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Возможности платформы</h2>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-delay="0">
+                    <div class="feature-icon">🗺️</div>
+                    <h3 class="feature-title">Интерактивная карта</h3>
+                    <p class="feature-description">ИИ подберет площадки по вашим параметрам с учетом местоположения и предпочтений</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="100">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Быстрое создание</h3>
+                    <p class="feature-description">Создайте игру за 3 клика. Время, место, уровень — и готово!</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="200">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Мгновенный поиск</h3>
+                    <p class="feature-description">Находите игры рядом с вами и присоединяйтесь одним нажатием</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-delay="300">
+                    <div class="feature-icon">⭐</div>
+                    <h3 class="feature-title">Система рейтинга</h3>
+                    <p class="feature-description">Прозрачная репутация для безопасного и качественного комьюнити</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section" id="map">
+        <div class="container">
+            <h2 class="section-title">Найдите площадку</h2>
+            <div class="map-container">
+                <div class="map-sidebar">
+                    <div class="map-filters">
+                        <div class="filter-group">
+                            <label>Вид спорта</label>
+                            <select id="sportFilter" class="filter-select">
+                                <option value="">Все виды</option>
+                                <option value="padel">Падел-теннис</option>
+                                <option value="football">Футбол</option>
+                                <option value="basketball">Баскетбол</option>
+                                <option value="volleyball">Волейбол</option>
+                                <option value="tennis">Теннис</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Район</label>
+                            <input type="text" id="districtFilter" placeholder="Например: Центральный">
+                        </div>
+                        <div class="filter-group">
+                            <label>Макс. расстояние (км)</label>
+                            <input type="number" id="distanceFilter" placeholder="5" min="1" max="50">
+                        </div>
+                        <button class="btn btn-primary btn-block" onclick="filterVenues()">Найти</button>
+                    </div>
+                    <div class="venues-list" id="venuesList">
+                        <!-- Будет заполнено через JS -->
+                    </div>
+                </div>
+                <div class="map-display" id="mapDisplay">
+                    <div class="map-placeholder">
+                        🗺️ Интерактивная карта
+                        <p style="font-size: 14px; opacity: 0.7; margin-top: 10px;">Здесь будет интеграция с Google Maps / Яндекс.Карты</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Create Game Section -->
+    <section class="create-section" id="create">
+        <div class="container">
+            <h2 class="section-title">Создать игру</h2>
+            <div class="create-container">
+                <form class="create-form" id="createGameForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Вид спорта</label>
+                            <select id="sportType" required>
+                                <option value="">Выберите вид спорта</option>
+                                <option value="padel">Падел-теннис</option>
+                                <option value="football">Футбол</option>
+                                <option value="basketball">Баскетбол</option>
+                                <option value="volleyball">Волейбол</option>
+                                <option value="tennis">Теннис</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Дата и время</label>
+                            <input type="datetime-local" id="gameDateTime" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Уровень игры</label>
+                            <select id="gameLevel" required>
+                                <option value="">Выберите уровень</option>
+                                <option value="beginner">Начинающий (1.0 - 2.0)</option>
+                                <option value="amateur">Любитель (2.0 - 3.5)</option>
+                                <option value="advanced">Продвинутый (3.5 - 5.0)</option>
+                                <option value="pro">Профессионал (5.0+)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Минимальный рейтинг</label>
+                            <input type="number" id="minRating" step="0.1" placeholder="2.5" min="1" max="10">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Количество мест</label>
+                            <input type="number" id="totalSlots" placeholder="4" min="2" max="20" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Площадка</label>
+                            <input type="text" id="venue" placeholder="Выберите на карте" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Дополнительная информация</label>
+                        <textarea id="gameDescription" rows="3" placeholder="Опишите детали игры..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-large">Создать игру</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section class="games-section" id="games">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Доступные игры</h2>
+                <div class="games-filters">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="today">Сегодня</button>
+                    <button class="filter-btn" data-filter="tomorrow">Завтра</button>
+                    <button class="filter-btn" data-filter="week">Эта неделя</button>
+                </div>
+            </div>
+            <div class="games-grid" id="gamesGrid">
+                <!-- Будет заполнено через JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Players Section -->
+    <section class="players-section" id="players">
+        <div class="container">
+            <h2 class="section-title">Игроки</h2>
+            <div class="players-search">
+                <input type="text" id="playersSearch" placeholder="Поиск игроков..." class="search-input">
+                <select id="playersSort" class="sort-select">
+                    <option value="rating">По рейтингу</option>
+                    <option value="games">По количеству игр</option>
+                    <option value="winrate">По проценту побед</option>
+                </select>
+            </div>
+            <div class="players-grid" id="playersGrid">
+                <!-- Будет заполнено через JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Section -->
+    <section class="profile-section" id="profile">
+        <div class="container">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar-large">АИ</div>
+                    <div class="profile-info">
+                        <h2 class="profile-name">Алексей Иванов</h2>
+                        <p class="profile-sport">Падел-теннис • Любитель</p>
+                        <div class="profile-rating">
+                            <span class="rating-badge">★ 4.5</span>
+                            <span class="profile-location">📍 Москва, Центр</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary">Редактировать</button>
+                </div>
+                
+                <div class="profile-stats-grid">
+                    <div class="profile-stat-card">
+                        <div class="stat-icon">🎮</div>
+                        <div class="stat-value">47</div>
+                        <div class="stat-label">Игр сыграно</div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-value">32</div>
+                        <div class="stat-label">Побед</div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="stat-icon">📊</div>
+                        <div class="stat-value">68%</div>
+                        <div class="stat-label">Процент побед</div>
+                    </div>
+                    <div class="profile-stat-card">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-value">156</div>
+                        <div class="stat-label">Часов игры</div>
+                    </div>
+                </div>
+
+                <div class="profile-tabs">
+                    <button class="tab-btn active" data-tab="upcoming">Предстоящие игры</button>
+                    <button class="tab-btn" data-tab="history">История</button>
+                    <button class="tab-btn" data-tab="achievements">Достижения</button>
+                </div>
+
+                <div class="tab-content active" id="upcoming">
+                    <div class="games-list" id="upcomingGames">
+                        <!-- Будет заполнено через JS -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="history">
+                    <div class="games-list" id="historyGames">
+                        <!-- История игр -->
+                    </div>
+                </div>
+
+                <div class="tab-content" id="achievements">
+                    <div class="achievements-grid">
+                        <div class="achievement-card unlocked">
+                            <div class="achievement-icon">🏅</div>
+                            <div class="achievement-name">Первая игра</div>
+                        </div>
+                        <div class="achievement-card unlocked">
+                            <div class="achievement-icon">🎯</div>
+                            <div class="achievement-name">10 побед</div>
+                        </div>
+                        <div class="achievement-card">
+                            <div class="achievement-icon">👑</div>
+                            <div class="achievement-name">50 побед</div>
+                        </div>
+                        <div class="achievement-card">
+                            <div class="achievement-icon">⭐</div>
+                            <div class="achievement-name">Рейтинг 5.0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon">⚽</span>
+                    <span class="logo-text">Sporty</span>
+                </div>
+                <p class="footer-text">© 2024 Sporty. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
